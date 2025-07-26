@@ -39,7 +39,7 @@
 
 		<img id="jumpscare-image" src="scare.jpg">
 
-		<audio id="scream-audio" src="scream2.mp3" preload="auto"></audio>
+		<audio id="scream-audio" src="scream2.mp3" preload="auto" loop></audio>
 
 		<script>
 			const gate = document.getElementById("gate");
@@ -48,26 +48,22 @@
 			const docElement = document.documentElement;
 
 			function initiateJumpscare() {
-				// Hide the "Tap to Enter" message
 				gate.style.display = "none";
 			
-				// Request fullscreen
 				if (docElement.requestFullscreen) {
 					docElement.requestFullscreen();
-				} else if (docElement.mozRequestFullScreen) { /* Firefox */
+				} else if (docElement.mozRequestFullScreen) {
 					docElement.mozRequestFullScreen();
-				} else if (docElement.webkitRequestFullscreen) { /* Chrome, Safari & Opera */
+				} else if (docElement.webkitRequestFullscreen) {
 					docElement.webkitRequestFullscreen();
 				}
 
-				// Play audio at max volume
-				audio.volume = 1.0;
+				audio.currentTime = 0.5;
+				audio.volume = 1.0; 
 				audio.play();
 
-				// Show the image
 				image.style.display = "block";
 				
-				// Start flashing with inverted colors
 				let isInverted = false;
 				setInterval(() => {
 					image.style.filter = isInverted ? 'invert(0)' : 'invert(1)';
