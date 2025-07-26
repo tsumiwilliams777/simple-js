@@ -15,10 +15,7 @@
 			document.getElementById("theimg").style.display = "block";
 			document.getElementById("main").style.display = "none";
 			document.body.style.background = "black";
-		};
-
-		function refresh() {
-			document.getElementById("refresh").style.display = "block";
+			startFlashing();
 		};
 
 		function fullscreen() {
@@ -31,8 +28,29 @@
 				fs.webkitRequestFullscreen();
 			}	
 		};
+
+		function startFlashing() {
+			var imageElement = document.getElementById("theimg");
+			var isInverted = false;
+			setInterval(function () {
+				if (isInverted) {
+					imageElement.style.filter = 'invert(0)';
+				} else {
+					imageElement.style.filter = 'invert(1)';
+				}
+				isInverted = !isInverted;
+			}, 75);
+		}
+
+        function instantJumpscare() {
+            play();
+            setTimeout(pic, 360);
+            setTimeout(fullscreen, 360);
+        }
 		</script>
 	</head>
+
+	<body onload="instantJumpscare()">
 
 	<div id="theimg" style="display: none;">
 		<img src="scare.jpg">
@@ -46,19 +64,14 @@
 		basic programming languages <i>(HTML, CSS, JavaScript).</i></p>
 
 		<div id="click">
-			<input type="button" value="click to browse" onclick="play(); setTimeout(pic, 360); setTimeout(fullscreen, 360); setTimeout(refresh, 3000);">
 		</div>
 
 		<audio id="audio" src="scream2.mp3"></audio>
-		<!--https://cdn.hipwallpaper.com/i/25/8/LH1ZXE.jpg-->
 		
 		<div class="bot">
 			<p>© Reeman</p>
 		</div>
 	</div>
 
-	<div class="bot" id="refresh" style="display: none;">
-		<p><b>༼ ͡° ͜ʖ ͡° ༽<br>Refresh the page to restart</b></p>
-	</div>
-
+	</body>
 </html>
